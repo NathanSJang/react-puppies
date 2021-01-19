@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { signUp } from '../../utilities/users-service';
 
 export default function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -17,9 +18,18 @@ export default function SignUpForm() {
     setFormData(newFormData);
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    alert(JSON.stringify(formData))
+    try {
+      const newFormData = {...formData};
+      delete newFormData.error;
+      delete newFormData.confirm;
+      const user = await signUp(newFormData);
+      console.log(user);
+      
+    } catch {
+      setFormData({error: 'Sign Up Failed - Try Again'})
+    }
   }
 
   const disable = formData.password !== formData.confirm;
