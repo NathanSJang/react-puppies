@@ -48,3 +48,8 @@ export async function login(credentials) {
     throw new Error('Invalid Login');
   }
 }
+
+export async function checkToken() {
+  const date = new Date(await usersAPI.checkToken());
+  return date;
+}
