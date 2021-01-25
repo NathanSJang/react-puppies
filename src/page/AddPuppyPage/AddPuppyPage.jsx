@@ -1,0 +1,69 @@
+import { useState, useRef, useEffect } from 'react';
+
+export default function AddPuppyPage(props) {
+  const [invalidForm, setInValidForm] = useState(true);
+  const [formData, setFormData] = useState({
+    name: '',
+    age: '',
+    breed: '',
+  });
+
+  const formRef = useRef();
+
+  useEffect(() => {
+    formRef.current.checkValidity() ? setInValidForm(false) : setInValidForm(true);
+  }, [formData]);
+
+  function handleChange(e) {
+    const newFormData = {...formData, [e.target.name]: e.target.value}
+    setFormData(newFormData)
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    props.handleAddPuppy(formData);
+  }
+
+  return (
+    <>
+      <h1>Add Puppy</h1>
+      <form  autoComplete="off" ref={formRef} onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Pup's Name (required)</label>
+          <input
+            className="form-control"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Pup's Breed (required)</label>
+          <input
+            className="form-control"
+            name="breed"
+            value={ formData.breed}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Pup's Age</label>
+          <input
+            className="form-control"
+            name="age"
+            value={ formData.age}
+            onChange={handleChange}
+          />
+        </div>
+        <button
+          type="submit"
+          className="btn"
+          disabled={invalidForm}
+        >
+          ADD PUPPY
+        </button>
+      </form>
+    </>
+  );
+}

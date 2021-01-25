@@ -4,7 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 
 require('dotenv').config();
-require('./config/databse');
+require('./config/database');
 
 
 const app = express();
@@ -21,6 +21,9 @@ app.use(require('./config/checkToken'));
 // Put API routes here, before the "catch all" route
 
 app.use('/api/users', require('./routes/api/users'));
+
+const ensureLoggedIn = require('./config/ensureLoggedIn');
+app.use('/api/puppies', ensureLoggedIn, require('./routes/api/puppies'))
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests

@@ -9,9 +9,11 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav>
-      <NavLink exact activeStyle={{color: 'blue'}} to="/puppies">Puppies</NavLink>
+      <NavLink exact activeStyle={{color: 'blue'}} to="/puppies">Check your token</NavLink>
       &nbsp; | &nbsp;
-      <NavLink exact activeStyle={{color: 'blue'}} to="/puppies/new">new Puppy</NavLink>
+      <NavLink exact activeStyle={{color: 'blue'}} to="/puppies/list">Puppies List</NavLink>
+      &nbsp; | &nbsp;
+      <NavLink exact activeStyle={{color: 'blue'}} to="/puppies/add">Add Puppy</NavLink>
       &nbsp; | &nbsp; <span>Welcome {user.name}</span>
       &nbsp; | &nbsp; <Link to='' onClick={handleLogOut}>Log Out</Link>
     </nav>
