@@ -11,6 +11,7 @@ function PuppyList(props) {
           <PuppyListItem
             puppy={puppy}
             key={puppy._id}
+            handleDeletePuppy={props.handleDeletePuppy}
           />
         )}
       </div>

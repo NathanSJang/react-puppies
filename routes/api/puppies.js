@@ -6,5 +6,6 @@ router.get('/', puppiesCtrl.getAll);
 router.post('/', puppiesCtrl.create);
 router.get('/:id', puppiesCtrl.show);
 router.put('/:id', puppiesCtrl.update);
+router.delete('/:id', puppiesCtrl.delete);
 
 module.exports = router;

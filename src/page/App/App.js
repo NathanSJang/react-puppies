@@ -15,6 +15,14 @@ import './App.css';
 function App() {
   const [user, setUser] = useState(getUser());
   const [puppies, setPuppies] = useState([]);
+
+  useEffect( () => {
+    async function getPuppies() {
+      const puppies = await puppyAPI.getAll();
+      setPuppies(puppies)
+    }
+    getPuppies()
+  }, [])
   
     const history = useHistory();
     
@@ -33,6 +41,11 @@ function App() {
     setPuppies(newPuppyArray);
   }
 
+  async function handleDeletePuppy(puppyID) {
+    const deletedPuppy = await puppyAPI.deleteOne(puppyID);
+    setPuppies(puppies.filter(p => p._id !== puppyID))
+  }
+
   return (
     <div className="App">
       {user ? 
@@ -40,7 +53,7 @@ function App() {
           <NavBar user={user} setUser={setUser} />
             <Switch>
               <Route path="/puppies/list">
-                <PuppiesListPage />
+                <PuppiesListPage puppies={puppies} handleDeletePuppy={handleDeletePuppy}/>
               </Route>
               <Route path="/puppies/add">
                 <AddPuppyPage handleAddPuppy={handleAddPuppy} />

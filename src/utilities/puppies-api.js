@@ -15,6 +15,10 @@ export function update(updatePuppy) {
   return sendRequest(`${BASE_URL}/${updatePuppy._id}`, 'PUT', updatePuppy);
 }
 
+export function deleteOne(puppyID){
+  return sendRequest(`${BASE_URL}/${puppyID}`, 'DELETE');
+}
+
 /*--- Helper Functions ---*/
 
 async function sendRequest(url, method = 'GET', payload = null) {

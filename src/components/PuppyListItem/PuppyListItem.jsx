@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './PuppyListItem.css';
 
-function PuppyListItem({puppy}) { 
+function PuppyListItem({puppy, handleDeletePuppy}) { 
   return (
     <div className='panel panel-default'>
       <div className="panel-heading">
@@ -29,6 +29,7 @@ function PuppyListItem({puppy}) {
         </Link>
         <button
           className='btn btn-xs btn-danger margin-left-10'
+          onClick={() => {handleDeletePuppy(puppy._id)}}
         >
           DELETE
         </button>
