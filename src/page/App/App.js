@@ -6,6 +6,7 @@ import PuppiesListPage from '../PuppiesListPage/PuppiesListPage'
 import PuppiesHistoryPage from '../PuppiesHistoryPage/PuppiesHistoryPage';
 import AddPuppyPage from '../AddPuppyPage/AddPuppyPage';
 import PuppyDetailPage from '../PuppyDetailPage/PuppyDetailPage'
+import PuppyEditPage from "../PuppyEditPage/PuppyEditPage";
 import NavBar from '../../components/NavBar/NavBar';
 import * as puppyAPI from "../../utilities/puppies-api";
 
@@ -14,21 +15,23 @@ import './App.css';
 function App() {
   const [user, setUser] = useState(getUser());
   const [puppies, setPuppies] = useState([]);
+  
+    const history = useHistory();
+    
+    useEffect(() => {
+      history.push("/puppies/list")
+    }, [puppies, history])
 
   async function handleAddPuppy (newPupData){
     const newPup = await puppyAPI.create(newPupData);
     setPuppies([...puppies, newPup])
   }
 
-  const history = useHistory();
-
-  // useEffect(() =>{
-  //   history.push("/puppies/list")
-  // }, [puppies, history])
-
-  useEffect(() => {
-    history.push("/puppies/list")
-  }, [puppies, history])
+  async function handleUpdatePuppy(updatedPuppyData) {
+    const updatedPuppy = await puppyAPI.update(updatedPuppyData);
+    const newPuppyArray = puppies.map(puppy => puppy._id === updatedPuppy._id ? updatedPuppy : puppy);
+    setPuppies(newPuppyArray);
+  }
 
   return (
     <div className="App">
@@ -44,6 +47,9 @@ function App() {
               </Route>
               <Route exact path="/puppies/details">
                 <PuppyDetailPage />
+              </Route>
+              <Route exact path="/puppies/edit">
+                <PuppyEditPage handleUpdatePuppy={handleUpdatePuppy}/>
               </Route>
               <Route path="/puppies">
                 <PuppiesHistoryPage />

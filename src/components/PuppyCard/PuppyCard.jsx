@@ -16,7 +16,7 @@ function PuppyCard({puppy}) {
         </dl>
       </div>
       <div className='panel-footer'>
-        <Link to='/'>RETURN TO LIST</Link>
+        <Link to='/puppies/list'>RETURN TO LIST</Link>
       </div>
     </div>
   );

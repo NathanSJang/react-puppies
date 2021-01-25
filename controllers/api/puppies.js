@@ -4,6 +4,7 @@ module.exports = {
   getAll,
   create,
   show,
+  update,
 }
 
 async function getAll(req, res) {
@@ -20,4 +21,11 @@ async function create(req, res) {
 async function show(req, res) {
   const puppy = await Puppy.findById(req.params.id);
   res.status(200).json(puppy);
+}
+
+async function update(req, res) {
+  const updatedPuppy = await Puppy.findByIdAndUpdate(req.params.id, req.body, {
+    new: true
+  });
+  res.status(200).json(updatedPuppy)
 }

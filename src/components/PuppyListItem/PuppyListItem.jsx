@@ -21,7 +21,7 @@ function PuppyListItem({puppy}) {
         <Link
           className='btn btn-xs btn-warning'
           to={{
-            pathname: '/edit',
+            pathname: '/puppies/edit',
             state: {puppy}
           }}
         >

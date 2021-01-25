@@ -8,7 +8,11 @@ export function getAll() {
 }
 
 export function create(newPupData) {
-  return sendRequest(BASE_URL, 'POST', newPupData)
+  return sendRequest(BASE_URL, 'POST', newPupData);
+}
+
+export function update(updatePuppy) {
+  return sendRequest(`${BASE_URL}/${updatePuppy._id}`, 'PUT', updatePuppy);
 }
 
 /*--- Helper Functions ---*/
